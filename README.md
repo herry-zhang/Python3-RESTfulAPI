@@ -211,7 +211,7 @@ class GetUserSerializer(serializers.Serializer):
         return result
 
 ```
-**在apis/api_v1/user/serializers.py创建Serializer类**
+**在apis/api_v1/user/view.py创建视图**
 ``` python {.line-numbers}
 """
 用户模块
