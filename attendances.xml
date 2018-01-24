@@ -1,0 +1,7 @@
+<uwsgi>
+    <socket>127.0.0.1:8000</socket><!-- 内部端口，自定义 -->
+        <chdir>/root/web/attendances/attendances</chdir><!-- 项目路径 -->
+            <module>attendances.wsgi</module>
+                <processes>4</processes> <!-- 进程数 --> 
+    <daemonize>uwsgi.log</daemonize><!-- 日志文件 -->
+</uwsgi>
