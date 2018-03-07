@@ -6,10 +6,10 @@
 2. 部署的时候，系统版本为Centos7，uWsgi版本使用本文发布时最新的2.0.15，Nginx版本1.13.7
 
 ## 第一部分 开发流程以及问题说明
-由于项目本身基于 Token 的身份验证，另外有些接口不只是处理一个表里的数据，直接通过ORM不太好映射，所以并没有完全按照Django REST FrameWork进行开发，并且只采用GET和POST方法。
+由于项目本身基于 Token 的身份验证，另外有些接口不只是处理一个表里的数据，直接通过ORM不太好映射，所以并没有完全按照Django REST FrameWork进行开发，并且只采用GET和POST方法。
 
 ### 一、开发步骤
-首先搭建开发环境并且创建一个新的项目。
+首先搭建开发环境并且创建一个新的项目。
 #### 1. 安装Python3：如果使用的是 Mac OS X ，系统可能已经预装了 Python 。我们可以通过homebrew安装Python3。
 ``` shell
 $ brew install python3
@@ -40,7 +40,7 @@ INSTALLED_APPS = (
 )
 ```
 #### 5. 写接口代码前的一点准备。
-做完以上步骤，我们就把项目开发需要的环境搭建完成了，接下来就可以在我们的项目中添加接口了。
+做完以上步骤，我们就把项目开发需要的环境搭建完成了，接下来就可以在我们的项目中添加接口了。
 
 另外还有一点要说明的是，为了给我们的api增加版本控制，我们的文件目录和路由是这样处理的，这样我们就可以通过添加新的版本文件并且修改配置，同时运行多个版本的接口：
 
@@ -100,7 +100,7 @@ app_name = 'api-v1'
 
 **请求方法：** GET-获取用户信息 POST-修改用户信息
 
-> 文件说明：apis存放的是api接口文件，app存放的是应用或者可以说是模块，attendances是项目文件存放一些项目配置，static静态文件，attendances.xml是uWsgi的配置文件，requirements.txt是一些项目相关的依赖，test.py是为了测试uWsgi是否配置成功的文件。
+> 文件说明：apis存放的是api接口文件，app存放的是应用或者可以说是模块，attendances是项目文件存放一些项目配置，static静态文件，attendances.xml是uWsgi的配置文件，requirements.txt是一些项目相关的依赖，test.py是为了测试uWsgi是否配置成功的文件。
 #### 6. 创建一个可以使用的模型以及Serializer类、Django视图。
 **在apps/user/models.py创建User模型**
 ``` python {.line-numbers}
@@ -248,7 +248,7 @@ def user(request):
 ```
 到目前为止，我们已经完成了一个简单接口的创建，接下来可以对项目进行测试
 #### 4. 测试我们的Web API。首先启动一个开发服务器，之后在浏览器里输入地址访问我们的接口。
-启动开发服务器
+启动开发服务器
 ``` shell {.line-numbers}
 python manage.py runserver
 
@@ -259,7 +259,7 @@ Django version 2.0, using settings 'attendances.settings'
 Development server is running at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
-在浏览器里输入接口地址，获取到接口数据：http://127.0.0.1:8000/api/v1/user/?token=21cd4161-2a78-451e-8979-5fbd8538935e&user_id=4
+在浏览器里输入接口地址，获取到接口数据：http://127.0.0.1:8000/api/v1/user/?token=21cd4161-2a78-451e-8979-5fbd8538935e&user_id=4
 ``` python {.line-numbers}
 GET /api/v1/user/?token=21cd4161-2a78-451e-8979-5fbd8538935e&user_id=4
 ```
@@ -372,7 +372,7 @@ $ make install
 $ nginx
 ```
 通过链接查看nginx是否启动成功:http://192.168.2.110
-#### 6. 通过配置nginx.conf文件连接Django、uWsgi与Nginx
+#### 6. 通过配置nginx.conf文件连接Django、uWsgi与Nginx
 在/etc/nginx/nginx.conf修改nginx.conf
 ``` shell {.line-numbers}
     server {
@@ -421,7 +421,7 @@ $ python3 ./manage.py collectstatic
 ```
 这样所有Django前后台的静态文件都会集中到项目文件夹pro下static中，另外nginx-pro其中一个配置location /static即可让Nginx来处理静态内容。
 #### 2. Nginx权限问题(Nginx 403 forbidden)
-如果nginx用户没有web目录的权限，则会导致该错误。解决办法：修改web目录的读写权限。或者是把nginx的启动用户改成目录的所属用户，重起一下就能解决，在nginx.conf头部加入一行：user  root;因为项目是在root用户下建立的，通过这个用户去访问资源就可以访问。
+如果nginx用户没有web目录的权限，则会导致该错误。解决办法：修改web目录的读写权限。或者是把nginx的启动用户改成目录的所属用户，重起一下就能解决，在nginx.conf头部加入一行：user  root;因为项目是在root用户下建立的，通过这个用户去访问资源就可以访问。
 ``` shell
 chmod -R 766 /web
 ```
@@ -431,8 +431,8 @@ chmod -R 766 /web
 $ setsebool -P httpd_can_network_connect 1
 ```
 > 如果访问不了可以查看Nginx下的error.log文件，查看具体的问题，再找解决方法。
-## 分享一些中文文档资料
-> 有关Python、Django以及Django REST FrameWork的学习可以参考官方文档，以及以下中文文档，在网上找了很久，感觉以下这几个中文文档还是写的很不错的。
+## 分享一些中文文档资料
+> 有关Python、Django以及Django REST FrameWork的学习可以参考官方文档，以及以下中文文档，在网上找了很久，感觉以下这几个中文文档还是写的很不错的。
 
 [**Python：** 廖雪峰老师Python教程，基于最新的Python 3版本](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)
 
